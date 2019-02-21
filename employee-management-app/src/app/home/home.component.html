@@ -1,0 +1,53 @@
+<h3>Add Employee</h3>
+<div class="add_form">
+  <form (ngSubmit)="addEmployee()">
+      <label>
+        Name:
+        <input type="text" [(ngModel)]="itemEmployee.name" name="name_employee">
+      </label>
+      <label>
+        Address:
+        <textarea [(ngModel)]="itemEmployee.address" name="adress_employee"></textarea>
+      </label>
+      <label>
+        Phone:
+        <input type="text" maxlength="14" [(ngModel)]="itemEmployee.phone" name="phone_employee">
+      </label>
+      <label>
+        Gender:
+        <input type="radio" value="true" [(ngModel)]="itemEmployee.gender" name="gender" required="required" checked="checked">
+        <input type="radio" value="false" [(ngModel)]="itemEmployee.gender" name="gender" required="required">
+      </label>
+      <br/>
+      <button type="submit" class="button">Add New</button>
+  </form>
+</div>
+
+<h3>Search Employees</h3>
+<span><input type="text" [(ngModel)]="nameSearch" name="name_search"><button class="button" (click)="searchEmployee()">Search</button></span>
+
+<div class="check_content" *ngIf="employees.length">
+  <h3>List Employees</h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Gender</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let eml of employees">
+      <td>{{eml.id}}</td>
+      <td>{{eml.name}}</td>
+      <td>{{eml.phone}}</td>
+      <td>{{eml.address}}</td>
+      <td>{{eml.gender}}</td>
+      <td align="center"><button (click)="deleteEmployee(eml)" class="button_remove">Remove</button></td>
+    </tr>
+  </table>
+</div>
+
+<div class="check_content" *ngIf="!employees.length">
+  <h3>Empty list</h3>
+</div>
