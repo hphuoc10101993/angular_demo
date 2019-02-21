@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Employee} from './employee';
+import {EmployeeService} from '../employee.service';
 
 @Component({
   selector: 'app-home',
@@ -8,40 +9,20 @@ import {Employee} from './employee';
 })
 export class HomeComponent implements OnInit {
 
-  employees: Employee[] = [];
-  itemEmployee = new Employee();
-  nameSearch: string;
-
-  constructor() { }
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
   }
 
   addEmployee() {
-    const employee = new Employee();
-    employee.id = 1;
-    if (this.employees.length > 0) {
-      employee.id = this.employees[this.employees.length - 1].id + 1;
-    }
-    employee.name = this.itemEmployee.name;
-    employee.phone = this.itemEmployee.phone;
-    employee.address = this.itemEmployee.address;
-    employee.gender = this.itemEmployee.gender;
-    this.employees.push(employee);
-    this.itemEmployee = new Employee();
+    this.employeeService.addEmployee();
   }
 
   deleteEmployee(employee: Employee) {
-    const index: number = this.employees.indexOf(employee);
-    if (index !== -1) {
-        this.employees.splice(index, 1);
-    }
+    this.employeeService.deleteEmployee(employee);
   }
 
   searchEmployee() {
-    if (this.nameSearch === '') {
-      return;
-    }
-    this.employees = this.employees.filter(emp => emp.name === this.nameSearch);
+    this.employeeService.searchEmployee();
   }
 }
