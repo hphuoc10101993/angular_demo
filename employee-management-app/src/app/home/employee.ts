@@ -3,5 +3,5 @@ export class Employee {
   public name: string;
   public address: string;
   public phone: string;
-  public gender: boolean;
+  public gender: string;
 }

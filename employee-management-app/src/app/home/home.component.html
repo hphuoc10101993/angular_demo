@@ -1,10 +1,15 @@
 <h3>Add Employee</h3>
 <div class="add_form">
-  <form (ngSubmit)="addEmployee()">
+  <form (ngSubmit)="addEmployee()" #employeeForm="ngForm">
+      <div class="form-group">
       <label>
         Name:
-        <input type="text" [(ngModel)]="employeeService.itemEmployee.name" name="name_employee">
+        <input type="text" [(ngModel)]="employeeService.itemEmployee.name" required name="name" class="form-control" id="name" #name="ngModel">
       </label>
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger validation">
+          Name is required
+      </div>
+      </div>
       <label>
         Address:
         <textarea [(ngModel)]="employeeService.itemEmployee.address" name="adress_employee"></textarea>
@@ -15,11 +20,14 @@
       </label>
       <label>
         Gender:
-        <input type="radio" value="true" [(ngModel)]="employeeService.itemEmployee.gender" name="gender" required="required" checked="checked">
-        <input type="radio" value="false" [(ngModel)]="employeeService.itemEmployee.gender" name="gender" required="required">
+        <input type="radio" value="Male" [(ngModel)]="employeeService.itemEmployee.gender" name="gender" #gender="ngModel" required="required" checked="checked">Male
+        <input type="radio" value="Female" [(ngModel)]="employeeService.itemEmployee.gender" name="gender" #gender="ngModel" required="required">Female
+        <div [hidden]="gender.valid || gender.pristine" class="alert alert-danger" class="validation">
+          Gender is required
+        </div>
       </label>
       <br/>
-      <button type="submit" class="button">Add New</button>
+      <button [disabled]="!employeeForm.form.valid" type="submit" class="button">Add New</button>
   </form>
 </div>
 
