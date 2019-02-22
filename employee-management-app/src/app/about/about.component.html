@@ -1,3 +1,7 @@
-<p>
-  about works!
-</p>
+<div class="container">
+  <h3>About Info</h3>
+  <button (click)="toggle($event)">Toggle</button>
+  <div [hidden]="!visible">
+      <p>This is content need to be hidden...</p>
+  </div>
+</div>
